@@ -107,7 +107,7 @@ const listings: Listing[] = [
     area: '800 m²',
   },
   {
-    image: '/images/immo-5.png',
+    image: '/images/Immo-5/immo-5.png',
     watermark: true,
     title: 'Baugrundstück in ruhiger Lage',
     location: 'Wallerfangen',
@@ -116,13 +116,13 @@ const listings: Listing[] = [
     area: '620 m²',
   },
   {
-    image: '/images/immo-6.png',
+    image: '/images/Immo-6/Nalbach (2).jpg',
     watermark: true,
-    title: 'Gewerbe- / Ladenfläche',
-    location: 'Dillingen Zentrum',
+    title: 'Traumhafter Weitblick, repräsentatives Projekt mit Alleinstellungsmerkmal',
+    location: 'Nalbach',
     price: 'VB',
-    status: 'Reserviert',
-    area: '95 m²',
+    status: 'Bald verfügbar',
+    area: '3000 m²',
   },
 ]
 
@@ -290,6 +290,11 @@ export function Listings() {
                     <p className="font-serif text-xl font-semibold text-primary">
                       {item.price}
                     </p>
+                    {item.price !== 'VB' && (
+                      <p className="text-[11px] text-muted-foreground">
+                        zzgl. 3,57% Maklercourtage
+                      </p>
+                    )}
                   </div>
                   <Button
                     render={<a href="#kontakt" />}

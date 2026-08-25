@@ -53,7 +53,7 @@ export function Contact() {
               </a>
 
               <a
-                href="mailto:info@ex-lux-imo.de"
+                href="mailto:info@ex-lux-immo.de"
                 className="flex items-start gap-4"
               >
                 <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -64,7 +64,7 @@ export function Contact() {
                     E-Mail
                   </span>
                   <span className="block text-sm text-muted-foreground">
-                    info@ex-lux-imo.de
+                    info@ex-lux-immo.de
                   </span>
                 </span>
               </a>
