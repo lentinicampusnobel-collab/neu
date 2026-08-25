@@ -3,29 +3,36 @@
 import { MapPin, Mail, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { FormEvent } from 'react'
-
-const contactEmail = 'info@ex-lux-immo.de'
+import { useState } from 'react'
 
 export function Contact() {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState('')
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    setIsSubmitting(true)
+    setSubmitMessage('')
 
     const formData = new FormData(event.currentTarget)
-    const name = String(formData.get('name') ?? '')
-    const email = String(formData.get('email') ?? '')
-    const topic = String(formData.get('topic') ?? '')
-    const message = String(formData.get('message') ?? '')
-    const subject = `Kontaktanfrage: ${topic}`
-    const body = [
-      `Name: ${name}`,
-      `E-Mail: ${email}`,
-      `Anliegen: ${topic}`,
-      '',
-      'Nachricht:',
-      message,
-    ].join('\n')
+    const fields = Object.fromEntries(formData.entries())
 
-    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fields),
+      })
+
+      if (!response.ok) throw new Error('Die Anfrage konnte nicht gesendet werden.')
+
+      event.currentTarget.reset()
+      setSubmitMessage('Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.')
+    } catch {
+      setSubmitMessage('Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -157,9 +164,14 @@ export function Contact() {
               />
             </div>
 
-            <Button type="submit" className="mt-5 w-full" size="lg">
-              Nachricht senden
+            <Button type="submit" className="mt-5 w-full" size="lg" disabled={isSubmitting}>
+              {isSubmitting ? 'Wird gesendet ...' : 'Nachricht senden'}
             </Button>
+            {submitMessage && (
+              <p className="mt-3 text-sm text-muted-foreground" role="status">
+                {submitMessage}
+              </p>
+            )}
           </form>
         </div>
       </div>

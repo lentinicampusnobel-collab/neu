@@ -1,23 +1,35 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, message, phone } = body;
+    const { name, email, topic, message } = body;
 
-    const data = await resend.emails.send({
-      from: 'onboarding@resend.dev', // Standard-Absender im Testmodus
-      to: ['lentini.campus.nobel@gmail.com'], // HIER DEINE RESEND-ANMELDE-EMAIL EINTRAGEN
-      subject: `Neue Kontaktanfrage von ${name}`,
-      replyTo: email,
-      text: `Name: ${name}\nE-Mail: ${email}\nTelefon: ${phone || 'Nicht angegeben'}\n\nNachricht:\n${message}`,
+    if (!name || !email || !topic || !message) {
+      return NextResponse.json({ error: 'Alle Formularfelder sind erforderlich.' }, { status: 400 });
+    }
+
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'onboarding@resend.dev',
+        to: ['info@ex-lux-immo.de'],
+        subject: `Neue Kontaktanfrage: ${topic}`,
+        reply_to: email,
+        text: `Name: ${name}\nE-Mail: ${email}\nAnliegen: ${topic}\n\nNachricht:\n${message}`,
+      }),
     });
 
-    return NextResponse.json(data);
-  } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    if (!response.ok) {
+      return NextResponse.json({ error: 'Die E-Mail konnte nicht gesendet werden.' }, { status: 502 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json({ error: 'Ungültige Anfrage.' }, { status: 400 });
   }
 }
