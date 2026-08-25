@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
-        to: ['info@ex-lux-immo.de'],
+        to: ['lentini.campus.nobel@gmail.com'],
         subject: `Neue Kontaktanfrage: ${topic}`,
         reply_to: email,
         text: `Name: ${name}\nE-Mail: ${email}\nAnliegen: ${topic}\n\nNachricht:\n${message}`,
