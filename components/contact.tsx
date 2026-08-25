@@ -1,7 +1,33 @@
+'use client'
+
 import { MapPin, Mail, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import type { FormEvent } from 'react'
+
+const contactEmail = 'info@ex-lux-immo.de'
 
 export function Contact() {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+    const name = String(formData.get('name') ?? '')
+    const email = String(formData.get('email') ?? '')
+    const topic = String(formData.get('topic') ?? '')
+    const message = String(formData.get('message') ?? '')
+    const subject = `Kontaktanfrage: ${topic}`
+    const body = [
+      `Name: ${name}`,
+      `E-Mail: ${email}`,
+      `Anliegen: ${topic}`,
+      '',
+      'Nachricht:',
+      message,
+    ].join('\n')
+
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  }
+
   return (
     <section id="kontakt" className="bg-concrete border-t border-border/70">
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
@@ -71,7 +97,10 @@ export function Contact() {
             </div>
           </div>
 
-          <form className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8">
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8"
+          >
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="name" className="text-sm font-medium">
