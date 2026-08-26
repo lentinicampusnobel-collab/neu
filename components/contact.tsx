@@ -1,7 +1,6 @@
 'use client'
 
 import { MapPin, Mail, Phone } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import type { FormEvent } from 'react'
 import { useState } from 'react'
 
@@ -85,10 +84,7 @@ export function Contact() {
                 </span>
               </a>
 
-              <a
-                href="mailto:info@ex-lux-immo.de"
-                className="flex items-start gap-4"
-              >
+              <div className="flex items-start gap-4">
                 <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Mail className="size-5" />
                 </span>
@@ -100,7 +96,7 @@ export function Contact() {
                     info@ex-lux-immo.de
                   </span>
                 </span>
-              </a>
+              </div>
             </div>
           </div>
 
@@ -164,9 +160,13 @@ export function Contact() {
               />
             </div>
 
-            <Button type="submit" className="mt-5 w-full" size="lg" disabled={isSubmitting}>
+            <button
+              type="submit"
+              className="mt-5 w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-50"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? 'Wird gesendet ...' : 'Nachricht senden'}
-            </Button>
+            </button>
             {submitMessage && (
               <p className="mt-3 text-sm text-muted-foreground" role="status">
                 {submitMessage}
