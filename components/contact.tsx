@@ -31,12 +31,12 @@ export function Contact() {
 
       event.currentTarget.reset()
       setSubmitMessage('Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.')
-   } catch {
+} catch (error) {
+      console.error('FEHLER BEIM SENDEN:', error)
       setSubmitMessage('Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
     } finally {
       setIsSubmitting(false)
-    }
-  }
+    }  }
 
   return (
     <section id="kontakt" className="bg-concrete border-t border-border/70">
