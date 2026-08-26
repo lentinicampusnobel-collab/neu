@@ -8,15 +8,16 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsSubmitting(true)
     setSubmitMessage('')
 
-    const formData = new FormData(event.currentTarget)
+    const form = event.currentTarget
+    const formData = new FormData(form)
     const fields = Object.fromEntries(formData.entries())
 
-   try {
+    try {
       const response = await fetch('/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -29,9 +30,8 @@ export function Contact() {
         throw new Error(data.error || 'Fehler beim Senden')
       }
 
-      event.currentTarget.reset()
-      setSubmitMessage('Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.')
-} catch (error) {
+      form.reset()
+      setSubmitMessage('Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.')} catch (error) {
       console.error('FEHLER BEIM SENDEN:', error)
       setSubmitMessage('Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
     } finally {
