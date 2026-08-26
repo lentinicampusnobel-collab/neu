@@ -78,11 +78,23 @@ const listings: Listing[] = [
   },
   {
     image: '/images/Immo-3/Hausfront-SLS.jpg',
-    watermark: true,
+    hoverImages: [
+      '/images/Immo-3/Bad.png',
+      '/images/Immo-3/Esszimmer.png',
+      '/images/Immo-3/Garten Terrasse.png',
+      '/images/Immo-3/Hinten Aussen.png',
+      '/images/Immo-3/Küche.png',
+      '/images/Immo-3/Wohnzimmer.jpg',
+      '/images/Immo-3/EG-Plan.jpg',
+      '/images/Immo-3/UG-Plan.jpg',
+      '/images/Immo-3/Sanierungsfahrplan.png',
+    ],
     title: 'Großzügiges Reihenmittelhaus mit Potenzial in ruhiger Anliegerlage',
+    description:
+      'Ein großzügiges Reihenmittelhaus mit rund 222 m² Wohnfläche, vollständiger Unterkellerung, Garage und einem rund 474 m² großen Grundstück in ruhiger Saarlouiser Wohnlage. Das Haus bietet viel Platz und erhebliches Gestaltungspotenzial, erfordert aufgrund seines Baujahrs jedoch technische und energetische Modernisierungen. Der große Vorteil bei diesem Objekt ist dass schon ein ausgearbeiteter Sarnierungsfahrplan erstellt wurde, mit bestmöglichen Förderungschancen. Besonders interessant ist die Immobilie für Käufer, die großzügiges Wohnen schätzen und ihr zukünftiges Zuhause individuell entwickeln möchten.',
     location: 'Saarlouis',
-    price: 'VB',
-    status: 'Bald verfügbar',
+    price: '369.000 €',
+    status: 'Neu',
     rooms: '6 ZKB',
     baths: '1 Bad 1 GWC',
     livingArea: '222 m²',
@@ -243,7 +255,7 @@ export function Listings() {
                     {item.title}
                   </h3>
                   {item.description && (
-                    <div className="pointer-events-none absolute bottom-full left-0 z-20 mb-3 w-[min(32rem,calc(100vw-3rem))] translate-y-2 rounded-lg border border-border bg-card p-4 text-left text-sm leading-relaxed text-card-foreground opacity-0 shadow-lg transition-all duration-200 group-hover/title:pointer-events-auto group-hover/title:translate-y-0 group-hover/title:opacity-100 group-focus-within/title:pointer-events-auto group-focus-within/title:translate-y-0 group-focus-within/title:opacity-100">
+                    <div className="pointer-events-none absolute bottom-full right-0 z-20 mb-3 w-[min(32rem,calc(100vw-3rem))] translate-y-2 rounded-lg border border-border bg-card p-4 text-left text-sm leading-relaxed text-card-foreground opacity-0 shadow-lg transition-all duration-200 group-hover/title:pointer-events-auto group-hover/title:translate-y-0 group-hover/title:opacity-100 group-focus-within/title:pointer-events-auto group-focus-within/title:translate-y-0 group-focus-within/title:opacity-100">
                       {item.description}
                     </div>
                   )}
