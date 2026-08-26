@@ -1,14 +1,12 @@
-import { NextResponse } from 'next/server'
-
-export const dynamic = 'force-dynamic'
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const apiKey = process.env.RESEND_API_KEY
+    const data = await req.json();
+    const apiKey = process.env.RESEND_API_KEY;
 
     if (!apiKey) {
-      return NextResponse.json({ error: 'Key fehlt' }, { status: 500 })
+      return NextResponse.json({ error: 'Kein API Key vorhanden' }, { status: 500 });
     }
 
     const res = await fetch('https://api.resend.com/emails', {
@@ -20,18 +18,18 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
         to: ['lentini.campus.nobel@gmail.com'],
-        subject: `Kontaktanfrage: ${body.topic || 'Allgemein'}`,
-        reply_to: body.email || undefined,
-        text: `Name: ${body.name || '-'}\nE-Mail: ${body.email || '-'}\nNachricht:\n${body.message || '-'}`,
+        subject: 'Neue Kontaktanfrage',
+        text: `Name: ${data.name}\nE-Mail: ${data.email}\nNachricht: ${data.message}`,
       }),
-    })
+    });
 
     if (!res.ok) {
-      return NextResponse.json({ error: 'Resend Fehler' }, { status: 500 })
+      const errText = await res.text();
+      return NextResponse.json({ error: errText }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true })
-  } catch (err: any) {
-    return NextResponse.json({ error: err?.message || 'Fehler' }, { status: 500 })
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ error: 'Server-Fehler' }, { status: 500 });
   }
 }
