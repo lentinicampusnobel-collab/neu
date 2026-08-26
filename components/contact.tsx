@@ -16,18 +16,22 @@ export function Contact() {
     const formData = new FormData(event.currentTarget)
     const fields = Object.fromEntries(formData.entries())
 
-    try {
+   try {
       const response = await fetch('/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(fields),
       })
 
-      if (!response.ok) throw new Error('Die Anfrage konnte nicht gesendet werden.')
+      const data = await response.json()
+
+      if (!response.ok || data.error) {
+        throw new Error(data.error || 'Fehler beim Senden')
+      }
 
       event.currentTarget.reset()
       setSubmitMessage('Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.')
-    } catch {
+   } catch {
       setSubmitMessage('Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
     } finally {
       setIsSubmitting(false)

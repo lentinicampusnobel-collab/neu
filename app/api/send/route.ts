@@ -6,30 +6,31 @@ export async function POST(req: Request) {
     const apiKey = process.env.RESEND_API_KEY;
 
     if (!apiKey) {
-      return NextResponse.json({ error: 'Kein API Key vorhanden' }, { status: 500 });
+      return NextResponse.json({ error: 'API Key fehlt' }, { status: 500 });
     }
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ` + apiKey
+        'Authorization': 'Bearer ' + apiKey,
       },
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
         to: ['lentini.campus.nobel@gmail.com'],
         subject: 'Neue Kontaktanfrage',
-        text: `Name: ${data.name}\nE-Mail: ${data.email}\nNachricht: ${data.message}`,
+        text: `Name: ${data.name || ''}\nE-Mail: ${data.email || ''}\nAnliegen: ${data.topic || ''}\nNachricht: ${data.message || ''}`,
       }),
     });
 
+    const resData = await res.json();
+
     if (!res.ok) {
-      const errText = await res.text();
-      return NextResponse.json({ error: errText }, { status: 400 });
+      return NextResponse.json({ error: resData.message || 'Resend Fehler' }, { status: 400 });
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ error: 'Server-Fehler' }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: 'Server Fehler' }, { status: 500 });
   }
 }
