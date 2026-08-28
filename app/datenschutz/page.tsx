@@ -63,7 +63,7 @@ export default function DatenschutzPage() {
           <h3>Einwilligung &amp; Rechtsgrundlage</h3>
           <p>Die Nutzung dieses Dienstes erfolgt auf Grundlage Ihrer Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit über unseren Cookie-Banner oder die Datenschutzeinstellungen auf der Website widerrufbar.</p>
           <h3>Browser Plugin</h3>
-          <p>Sie können die Erfassung und Verarbeitung Ihrer Daten durch Google verhindern, indem Sie das unter dem folgenden <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noreferrer">Link verfügbare Browser-Plugin</a> herunterladen und installieren.</p>
+          <p>Sie können die Erfassung und Verarbeitung Ihrer Daten durch Google verhindern, indem Sie das Browser-Plugin unter folgendem Link herunterladen und installieren: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noreferrer">https://tools.google.com/dlpage/gaoptout</a>.</p>
         </div>
       </article>
       <SiteFooter />
