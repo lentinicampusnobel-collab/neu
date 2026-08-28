@@ -88,7 +88,10 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>) {
                 </span>
               </a>
 
-              <div className="flex items-start gap-4">
+              <a
+                href="#name"
+                className="flex items-start gap-4"
+              >
                 <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Mail className="size-5" />
                 </span>
@@ -100,11 +103,12 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>) {
                     info@ex-lux-immo.de
                   </span>
                 </span>
-              </div>
+              </a>
             </div>
           </div>
 
           <form
+            id="kontaktformular"
             onSubmit={handleSubmit}
             className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8"
           >

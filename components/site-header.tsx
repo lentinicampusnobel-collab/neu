@@ -6,11 +6,11 @@ import { Menu, X, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navItems = [
-  { label: 'Start', href: '#start' },
-  { label: 'Leistungen', href: '#leistungen' },
-  { label: 'Angebote', href: '#angebote' },
-  { label: 'Über uns', href: '#ueber-uns' },
-  { label: 'Kontakt', href: '#kontakt' },
+  { label: 'Start', href: '/#start' },
+  { label: 'Leistungen', href: '/#leistungen' },
+  { label: 'Angebote', href: '/#angebote' },
+  { label: 'Über uns', href: '/#ueber-uns' },
+  { label: 'Kontakt', href: '/#kontakt' },
 ]
 
 export function SiteHeader() {
@@ -19,7 +19,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-        <a href="#start" className="flex items-center gap-3">
+        <a href="/#start" className="flex items-center gap-3">
           <Image
             src="/images/Logo/Logo1.png"
             alt="Ex-Lux-Immo GmbH Logo"
@@ -51,7 +51,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          <Button render={<a href="#kontakt" />} nativeButton={false}>
+          <Button render={<a href="/#kontakt" />} nativeButton={false}>
             <Phone className="size-4" />
             Kontakt aufnehmen
           </Button>
@@ -82,7 +82,7 @@ export function SiteHeader() {
               </a>
             ))}
             <Button
-              render={<a href="#kontakt" onClick={() => setOpen(false)} />}
+              render={<a href="/#kontakt" onClick={() => setOpen(false)} />}
               nativeButton={false}
               className="my-3"
             >

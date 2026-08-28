@@ -21,13 +21,13 @@ export function SiteFooter() {
           </div>
 
           <nav className="flex flex-col gap-2 text-sm text-primary-foreground/85">
-            <a href="#leistungen" className="hover:text-primary-foreground">
+            <a href="/#leistungen" className="hover:text-primary-foreground">
               Leistungen
             </a>
-            <a href="#ueber-uns" className="hover:text-primary-foreground">
+            <a href="/#ueber-uns" className="hover:text-primary-foreground">
               Über uns
             </a>
-            <a href="#kontakt" className="hover:text-primary-foreground">
+            <a href="/#kontakt" className="hover:text-primary-foreground">
               Kontakt
             </a>
           </nav>
@@ -39,10 +39,10 @@ export function SiteFooter() {
             vorbehalten.
           </p>
           <p className="flex gap-4">
-            <a href="#" className="hover:text-primary-foreground">
+            <a href="/impressum" className="hover:text-primary-foreground">
               Impressum
             </a>
-            <a href="#" className="hover:text-primary-foreground">
+            <a href="/datenschutz" className="hover:text-primary-foreground">
               Datenschutz
             </a>
           </p>
